@@ -146,4 +146,160 @@ a:hover ~ #cursor {
 
 
 /* PROJECTS */
+.exp-card {
+    padding: 7px;
+    cursor: pointer;
+}
+
+.exp-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(255, 255, 255, 0.1);
+
+    background: rgba(255, 255, 255, 0.06); /* лёгкая прозрачность */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 16px;
+
+    transition:
+        background 0.5s ease,
+        border-color 0.5s ease,
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.exp-card h3 {
+    transition: all 0.4s ease;
+}
+
+.exp-card:hover h3 {
+    color: #ffffff;
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.6),
+        0 0 16px rgba(255,255,255,0.4);
+}
+
+.card-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.6);
+
+    margin-bottom: 8px;
+}
+
+
+.card-position {
+    position: relative;
+    display: inline-block;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    transition: color 0.3s ease;
+}
+
+
+.card-position::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+
+    width: 0;
+    height: 2px;
+
+    background: linear-gradient(90deg, #7fd8ff, #ffffff);
+
+    transition: width 0.4s ease;
+}
+
+.exp-card:hover .card-position::after {
+    width: 100%;
+}
+
+.tech-stack {
+    margin-top: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-badge {
+    padding: 6px 14px;
+
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    backdrop-filter: blur(8px);
+
+    color: rgba(255, 255, 255, 0.85);
+
+    transition: all 0.35s ease;
+}
+
+.tech-badge:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(127, 216, 255, 0.25),
+        rgba(255, 255, 255, 0.15)
+    );
+
+    border-color: rgba(127, 216, 255, 0.6);
+
+    color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 4px 15px rgba(127, 216, 255, 0.25),
+        0 0 10px rgba(127, 216, 255, 0.3);
+}
+
+.exp-card p{
+    /*font-family: "Boldonse", system-ui;*/
+}
+
+.exp-card {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.exp-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tech-badge {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.tech-badge.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 

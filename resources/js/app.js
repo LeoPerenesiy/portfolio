@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     color: 0x0011ff
                 });
                 stopWavePulse();
+                animateExperienceCards();
             } else if (targetId === "home") {
                 morphVanta({
                     waveHeight: 18,
@@ -255,4 +256,46 @@ function animateCursor() {
 
 animateCursor();
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".exp-card");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                const card = entry.target;
+                card.classList.add("show");
+
+                // Показываем бейджи с небольшим stagger
+                const badges = card.querySelectorAll(".tech-badge");
+                badges.forEach((badge, index) => {
+                    setTimeout(() => badge.classList.add("show"), index * 100);
+                });
+
+                observer.unobserve(card); // больше не нужно следить
+            }
+        });
+    }, {threshold: 0.2});
+
+    cards.forEach(card => observer.observe(card));
+});
+
+function animateExperienceCards() {
+    const cards = document.querySelectorAll(".exp-card");
+
+    cards.forEach(card => {
+        // Сбрасываем классы, чтобы анимация могла повториться
+        card.classList.remove("show");
+        const badges = card.querySelectorAll(".tech-badge");
+        badges.forEach(badge => badge.classList.remove("show"));
+
+        // Слегка задерживаем, чтобы CSS transition сработал
+        setTimeout(() => {
+            card.classList.add("show");
+            badges.forEach((badge, index) => {
+                setTimeout(() => badge.classList.add("show"), index * 100);
+            });
+        }, 50);
+    });
+}
 
