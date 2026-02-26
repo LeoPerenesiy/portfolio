@@ -1,0 +1,149 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.leo{
+    background: white;
+    color: black;
+}
+
+/* Основной стиль текста */
+.footer-btn {
+    color: white;
+    background: linear-gradient(120deg, #334155, #475569, #64748b, #94a3b8);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: waveText 6s ease infinite;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+/* Анимация движения воды */
+@keyframes waveText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hover эффект */
+.footer-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+/* Активная секция */
+.footer-btn.active {
+    filter: brightness(1.8) saturate(1.1);
+    text-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+#experience {
+    height: 100vh; /* Полная высота экрана */
+    position: relative; /* для absolute Vanta */
+    overflow: hidden;
+}
+
+#vanta-bg-exp {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;  /* Обязательно */
+    z-index: 0;
+}
+
+#experience div::-webkit-scrollbar {
+    width: 0;
+}
+
+#experience div::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 4px;
+}
+
+.exp-text-wrap{
+    height: 80%;
+}
+
+.social-links-wrapper{
+    height: 92px;
+    margin-right: 5rem;
+}
+
+.social-links-wrapper a{
+    padding-top: 30px;
+    line-height: 92px;
+}
+
+#hero-title{
+
+}
+
+#hero-subtitle{
+
+}
+
+
+
+#hero-text {
+    /*font-family: "Boldonse", system-ui;*/
+    /*font-weight: 200;*/
+    /*font-style: normal;*/
+    font-size: 1.2em;
+}
+
+
+#hero-subtitle{
+    /*border: 1px solid red;*/
+}
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 2px #00f, -2px -2px #f00; }
+    20% { text-shadow: -2px -2px #0ff, 2px 2px #f0f; }
+    40% { text-shadow: 2px -2px #0f0, -2px 2px #00f; }
+    60% { text-shadow: none; }
+    100% { text-shadow: none; }
+}
+
+a:hover ~ #cursor {
+    transform: scale(1.5) translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* Размытие-шлейф через ::after */
+#cursor::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    transform: translate(-50%, -50%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* PROJECTS */
+
