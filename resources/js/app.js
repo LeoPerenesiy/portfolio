@@ -180,7 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     waveHeight: 120,
                     waveSpeed: 3.5,
                     waveIntensity: 2.0,
-                    color: 0xff0033
+                    // color: 0xff0033
+                    // color: 880022
+                    color: 0x888888
                 }, 2000);
 
                 startWavePulse();
@@ -226,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 subtitle.style.animation = "none"; // сброс текущей анимации
                 subtitle.offsetHeight; // триггер перерендера
                 subtitle.style.animation = "glitch 0.6s ease"; // снова анимация
-            }, 3500);
+            }, 3000);
         }
     }
 
@@ -298,4 +300,52 @@ function animateExperienceCards() {
         }, 50);
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".project-card");
+
+    // WOW-анимация появления
+    function animateProjects() {
+        cards.forEach((card, index) => {
+            card.classList.remove("show");
+            setTimeout(() => card.classList.add("show"), index * 150);
+        });
+    }
+
+    // Инициализация слайдеров внутри каждой карточки
+    cards.forEach(card => {
+        const slides = card.querySelectorAll(".slides img");
+        if(slides.length === 0) return;
+
+        let current = 0;
+        const prevBtn = card.querySelector(".prev");
+        const nextBtn = card.querySelector(".next");
+
+        slides.forEach((s,i) => i !== 0 && (s.style.display = 'none'));
+
+        prevBtn.addEventListener('click', () => {
+            slides[current].style.display = 'none';
+            current = (current - 1 + slides.length) % slides.length;
+            slides[current].style.display = 'block';
+        });
+
+        nextBtn.addEventListener('click', () => {
+            slides[current].style.display = 'none';
+            current = (current + 1) % slides.length;
+            slides[current].style.display = 'block';
+        });
+    });
+
+    // Запуск анимации при входе на секцию Projects
+    const projectsSection = document.getElementById("projects");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                animateProjects();
+            }
+        });
+    }, {threshold: 0.2});
+    observer.observe(projectsSection);
+});
+
 
