@@ -182,7 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     waveIntensity: 2.0,
                     // color: 0xff0033
                     // color: 880022
-                    color: 0x888888
+                    // color: 0x888888
+                    // color: "0x303033"
+                    // color: "0xf5f5f7"
+                    // color: "0xe6e6e6"
+                    color: "0x1f1f1f"
                 }, 2000);
 
                 startWavePulse();
@@ -301,51 +305,78 @@ function animateExperienceCards() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".project-card");
+const items = document.querySelectorAll('.project-item');
+const images = document.querySelectorAll('.project-image');
+const blackOverlay = document.getElementById('blackOverlay');
 
-    // WOW-анимация появления
-    function animateProjects() {
-        cards.forEach((card, index) => {
-            card.classList.remove("show");
-            setTimeout(() => card.classList.add("show"), index * 150);
-        });
-    }
+function showProject(project) {
 
-    // Инициализация слайдеров внутри каждой карточки
-    cards.forEach(card => {
-        const slides = card.querySelectorAll(".slides img");
-        if(slides.length === 0) return;
-
-        let current = 0;
-        const prevBtn = card.querySelector(".prev");
-        const nextBtn = card.querySelector(".next");
-
-        slides.forEach((s,i) => i !== 0 && (s.style.display = 'none'));
-
-        prevBtn.addEventListener('click', () => {
-            slides[current].style.display = 'none';
-            current = (current - 1 + slides.length) % slides.length;
-            slides[current].style.display = 'block';
-        });
-
-        nextBtn.addEventListener('click', () => {
-            slides[current].style.display = 'none';
-            current = (current + 1) % slides.length;
-            slides[current].style.display = 'block';
-        });
+    // Убираем все картинки
+    images.forEach(img => {
+        img.classList.remove('opacity-100', 'scale-100');
+        img.classList.add('opacity-0', 'scale-105');
     });
 
-    // Запуск анимации при входе на секцию Projects
-    const projectsSection = document.getElementById("projects");
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                animateProjects();
-            }
+    // Находим нужную
+    const active = document.querySelector(`[data-project="${project}"].project-image`);
+
+    if (active) {
+        blackOverlay.style.opacity = "0";
+        active.classList.remove('opacity-0', 'scale-105');
+        active.classList.add('opacity-100', 'scale-100');
+    }
+}
+
+items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        showProject(item.dataset.project);
+    });
+
+    item.addEventListener('click', () => {
+        showProject(item.dataset.project);
+    });
+});
+
+// ANIMATION FOR PROJECTS SECTION ON SHOW (NO WHITE FLASH, IMAGES STAY CLICKABLE)
+function animateProjectsSection() {
+    const projectsSection = document.getElementById('projects');
+    const header = projectsSection.querySelector('.latest-works-header');
+    const projectItems = projectsSection.querySelectorAll('.project-item');
+
+    // Заголовок
+    header.style.opacity = '0';
+    header.style.transform = 'translateY(20px)';
+
+    // Список проектов справа
+    projectItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(20px)';
+    });
+
+    setTimeout(() => {
+        // Заголовок
+        header.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        header.style.opacity = '1';
+        header.style.transform = 'translateY(0)';
+
+        // Список проектов справа
+        projectItems.forEach((item, i) => {
+            setTimeout(() => {
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateX(0)';
+            }, i * 100);
         });
-    }, {threshold: 0.2});
-    observer.observe(projectsSection);
+    }, 50);
+}
+
+// Событие переключения футера
+document.querySelectorAll('.footer-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.dataset.target === 'projects') {
+            animateProjectsSection();
+        }
+    });
 });
 
 

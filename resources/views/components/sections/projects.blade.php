@@ -1,60 +1,97 @@
 <section id="projects" class="projects-section py-20 bg-gray-50">
-    <div class="container works-wrapper mt-20 mx-auto px-6 flex flex-col md:flex-row items-start md:items-stretch gap-12">
+    <div class="works-wrapper mt-20 mx-auto px-6 flex flex-col md:flex-row items-start md:items-stretch gap-12">
 
         <!-- Левая часть: картинка -->
-        <div class="w-full md:w-1/2 relative group">
-            <img src="{{ asset('images/grab.png') }}" alt="Project Screenshot" class="w-full h-full object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-105">
-            <!-- Overlay при наведении -->
-            <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white p-6 text-sm text-center">
-                Worked on Backend API, Queue Workers, Redis caching, Docker infrastructure
-            </div>
+        <div class="w-full md:w-1/2 relative overflow-hidden rounded-xl bg-black">
+            <!-- Чёрный фон -->
+            <div class="absolute inset-0 bg-black z-10 transition-opacity duration-500" id="blackOverlay"></div>
+
+            <!-- Картинки проектов -->
+            <img src="{{ asset('images/gambling1.png') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="gambling1">
+            <img src="{{ asset('images/gambling2.png') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="gambling2">
+            <img src="{{ asset('images/grabien.png') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="grabien">
         </div>
 
-        <!-- Правая часть: текст -->
+        <!-- Правая часть: список проектов -->
         <div class="w-full md:w-1/2 flex flex-col">
-            <h2 class="text-4xl font-bold mb-8">Latest Works</h2>
+            <h2 class="text-4xl font-bold mb-8 latest-works-header text-white tracking-tight" style="text-shadow: 0 2px 8px rgba(0,0,0,0.07);">
+                Latest Works
+            </h2>
 
-            <!-- Список проектов -->
-            <ul class="space-y-4">
-                <li class="text-2xl font-semibold text-gray-800 cursor-pointer relative group">
-                    iGaming Platform
-                    <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-                    <p class="text-gray-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
-                        Backend: Laravel, Redis, Docker, Queue workers
-                    </p>
+            <ul class="space-y-6 overflow-y-auto max-h-[600px] pr-2">
+                <li class="group cursor-pointer project-item relative" data-project="gambling1">
+                    <div class="relative inline-block transition-all duration-300 transform group-hover:translate-x-4">
+
+                        <!-- Стрелка -->
+                        <span class="absolute -left-6 top-1/2 -translate-y-1/2 opacity-0
+                         transition-all duration-300 group-hover:opacity-100 group-hover:-left-4 text-blue-300">
+              →
+            </span>
+
+                        <!-- Название проекта -->
+                        <span class="project-title text-2xl font-semibold relative text-white group-hover:text-blue-100">
+              iGaming Platform
+                            <!-- underline -->
+              <span class="block h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full mt-1 rounded"></span>
+            </span>
+                    </div>
                 </li>
-                <li class="text-2xl font-semibold text-gray-800 cursor-pointer relative group">
-                    iGaming Platform #2
-                    <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-                    <p class="text-gray-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
-                        Real-time trading dashboard, WebSocket streams, Optimized API
-                    </p>
+
+                <li class="group cursor-pointer project-item relative" data-project="gambling2">
+                    <div class="relative inline-block transition-all duration-300 transform group-hover:translate-x-4">
+            <span class="absolute -left-6 top-1/2 -translate-y-1/2 opacity-0
+                         transition-all duration-300 group-hover:opacity-100 group-hover:-left-4 text-blue-300">
+              →
+            </span>
+                        <span class="project-title text-2xl font-semibold relative text-white group-hover:text-blue-100">
+              iGaming Platform #2
+              <span class="block h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full mt-1 rounded"></span>
+            </span>
+                    </div>
                 </li>
-                <li class="text-2xl font-semibold text-gray-800 cursor-pointer relative group">
-                    Media Platform
-                    <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-                    <p class="text-gray-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
-                        Video processing dashboard with high-load backend and interactive frontend
-                    </p>
+
+                <li class="group cursor-pointer project-item relative" data-project="grabien">
+                    <div class="relative inline-block transition-all duration-300 transform group-hover:translate-x-4">
+            <span class="absolute -left-6 top-1/2 -translate-y-1/2 opacity-0
+                         transition-all duration-300 group-hover:opacity-100 group-hover:-left-4 text-blue-300">
+              →
+            </span>
+                        <span class="project-title text-2xl font-semibold relative text-white group-hover:text-blue-100">
+              Grabien
+              <span class="block h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full mt-1 rounded"></span>
+            </span>
+                    </div>
                 </li>
-                <li class="text-2xl font-semibold text-gray-800 cursor-pointer relative group">
-                    Health
-                    <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-                    <p class="text-gray-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
-                        Video processing dashboard with high-load backend and interactive frontend
-                    </p>
+
+                <li class="group cursor-pointer project-item relative" data-project="grabien">
+                    <div class="relative inline-block transition-all duration-300 transform group-hover:translate-x-4">
+            <span class="absolute -left-6 top-1/2 -translate-y-1/2 opacity-0
+                         transition-all duration-300 group-hover:opacity-100 group-hover:-left-4 text-blue-300">
+              →
+            </span>
+                        <span class="project-title text-2xl font-semibold relative text-white group-hover:text-blue-100">
+              Grabien
+              <span class="block h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full mt-1 rounded"></span>
+            </span>
+                    </div>
                 </li>
-                <li class="text-2xl font-semibold text-gray-800 cursor-pointer relative group">
-                    Sport
-                    <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-                    <p class="text-gray-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
-                        Video processing dashboard with high-load backend and interactive frontend
-                    </p>
+
+                <li class="group cursor-pointer project-item relative" data-project="grabien">
+                    <div class="relative inline-block transition-all duration-300 transform group-hover:translate-x-4">
+            <span class="absolute -left-6 top-1/2 -translate-y-1/2 opacity-0
+                         transition-all duration-300 group-hover:opacity-100 group-hover:-left-4 text-blue-300">
+              →
+            </span>
+                        <span class="project-title text-2xl font-semibold relative text-white group-hover:text-blue-100">
+              Grabien
+              <span class="block h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full mt-1 rounded"></span>
+            </span>
+                    </div>
                 </li>
-                <!-- Добавляешь ещё 6 проектов так же -->
+
+                <!-- Добавляешь остальные проекты по той же схеме -->
             </ul>
         </div>
 
     </div>
 </section>
-
