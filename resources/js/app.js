@@ -380,3 +380,80 @@ document.querySelectorAll('.footer-btn').forEach(btn => {
 });
 
 
+const projects = {
+    gambling1: {
+        title: "Backend Developer / iGaming Platform",
+        description: "Backend Developer / iGaming Engineer\n" +
+            "Developed and maintained high-load online gambling platform systems.\n" +
+            "Designed complex business logic for bonus systems (welcome bonuses, free spins, cashback, VIP programs), ensuring accurate calculations, instant crediting, and protection against abuse.\n" +
+            "Optimized microservice performance, implemented monitoring and alerting, reduced latency, and increased reliability of distributed systems under peak loads with thousands of concurrent players.\n"
+    },
+    gambling2: {
+        title: "Backend Developer / iGaming Platform",
+        description: "Responsible for backend development and maintenance of in-house games on a large gambling platform: original slots, crash, dice, plinko, table games, and other in-house titles.\n" +
+            "Implemented game logic, RTP configurations, volatility tuning, and bonus mechanics with a focus on fairness, compliance, and GGR maximization.\n" +
+            "Optimized performance for millions of spins per day, implemented real-time monitoring of actual RTP and anomalies, and scaled microservices for seamless gameplay with zero downtime.\n"
+    },
+    grabien: {
+        title: "Full Stack Developer / Grabien",
+        description: "Rewrote the legacy system of a leading media marketplace for news clips (Grabien — an online platform for journalists, producers, and media with video/audio archives, clipping tools, WebClipper, NewsBase, etc.).\n" +
+            "Integrated PDF parsing and Manticore Search for powerful full-text search across transcripts, documents, and metadata — significantly improving search speed, accuracy, and relevance.\n" +
+            "Added new features: UI/UX enhancements, batch processing, integrations with external services, and performance monitoring — all without downtime, focusing on stability and scalability for thousands of users.\n"
+    },
+    music: {
+        title: "Backend Developer / SaaS Training App",
+        description: "Designed a scalable and secure backend architecture.\n" +
+            "Implemented APIs for frontend and mobile clients.\n" +
+            "Integrated third-party services for video lessons and analytics.\n" +
+            "Managed user accounts, progress tracking, and notifications."
+    },
+    game: {
+        title: "Full Stack Developer / MVP for Gamers",
+        description: "Built from scratch an MVP web platform uniting gamers, artists, and professionals. Developed the backend in PHP (Laravel) and frontend in Vue.js, integrating external services (Steam, Discord, GitHub) for syncing user achievements.\n" +
+            "Implemented key features:\n" +
+            "- Token system for validating achievements and rewards\n" +
+            "- Gamified quests and tournaments\n" +
+            "- User profiles with digital trophy rooms and NFTs\n" +
+            "- Social feed for content and achievements\n" +
+            "- Admin panel for managing users and content"
+    },
+    car: {
+        title: "Backend Developer / Smart Auto Service",
+        description: "Fully developed the backend for a mobile iOS application, including integration with external services (maps, AI) and designing architecture for scalability and reliability."
+    }
+};
+
+const modal = document.getElementById('projectModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const closeModalBtn = document.getElementById('closeModal');
+
+document.querySelectorAll('.project-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const projectKey = item.dataset.project;
+        const project = projects[projectKey];
+
+        modalTitle.textContent = project.title;
+        modalDescription.textContent = project.description;
+
+        // Показать модалку с анимацией
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.children[0].classList.remove('opacity-0', 'scale-95');
+        }, 10);
+    });
+});
+
+closeModalBtn.addEventListener('click', () => {
+    modal.children[0].classList.add('opacity-0', 'scale-95');
+    setTimeout(() => modal.classList.add('hidden'), 300);
+});
+
+modal.addEventListener('click', e => {
+    if (e.target === modal) {
+        modal.children[0].classList.add('opacity-0', 'scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+});
+
+

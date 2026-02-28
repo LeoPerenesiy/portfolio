@@ -326,7 +326,6 @@ a:hover ~ #cursor {
     /*-webkit-text-fill-color: transparent;*/
 }
 
-/* Акцентная линия снизу */
 .latest-works-header::after {
     content: "";
     position: absolute;
@@ -335,12 +334,14 @@ a:hover ~ #cursor {
     width: 60%;
     height: 4px;
     border-radius: 4px;
-    background: linear-gradient(90deg, #2563eb, transparent);
+    background: linear-gradient(90deg, #abb1c1, transparent);
 }
 
 .project-title {
     position: relative;
     display: inline-block;
+    color: #fff; /* обычный цвет текста */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 /* Линия */
@@ -352,7 +353,7 @@ a:hover ~ #cursor {
     width: 0;
     height: 2px;
     border-radius: 4px;
-    background: linear-gradient(90deg, #111827, #2563eb);
+    background: linear-gradient(90deg, #abb1c1, #2563eb);
     transition: width 0.4s ease;
 }
 
@@ -360,3 +361,11 @@ a:hover ~ #cursor {
 .group:hover .project-title::after {
     width: 100%;
 }
+
+/* Эффект свечения текста при hover */
+.group:hover .project-title {
+    color: #fff;
+    text-shadow: 0 0 8px #2563eb, 0 0 12px #abb1c1;
+}
+
+
