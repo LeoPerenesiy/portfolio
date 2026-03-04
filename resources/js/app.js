@@ -174,9 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 morphVanta({
                     waveHeight: 120,
-                    waveSpeed: 3.5,
-                    waveIntensity: 2.0,
-                    color: "0x1f1f1f"
+                    waveSpeed: 2.8,
+                    waveIntensity: 1.8,
+                    color: 0x1a0033
                 }, 2000);
 
                 startWavePulse();
