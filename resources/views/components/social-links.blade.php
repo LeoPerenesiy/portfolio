@@ -23,4 +23,20 @@
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
     </a>
+
+    <!-- Email -->
+    <a href="mailto:leonid.perenesiy.pro@gmail.com"
+       target="_blank"
+       rel="noopener"
+       class="text-gray-300 hover:text-white hover:scale-110 transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-8 w-8"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor"
+             stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 8l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
+        </svg>
+    </a>
 </div>

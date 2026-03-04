@@ -1,6 +1,6 @@
 <section id="experience" class="relative w-full h-screen flex items-center justify-center overflow-hidden">
     <div class="exp-text-wrap relative z-10 w-4/5 max-w-3xl h-full overflow-y-auto text-white p-8">
-        <h2 class="text-5xl font-extrabold mb-8">Experience</h2>
+        <h2 class="text-5xl font-extrabold mb-8 experience-h1">Experience</h2>
 
         <div class="mb-6 exp-card">
             <h3 class="text-2xl font-semibold">Pixelteh</h3>
@@ -8,12 +8,12 @@
             <p class="text-gray-300 card-position">Backend developer</p>
             <br />
             <br />
-            <p class="text-gray-300">Developed high-load iGaming backend on Laravel, implementing betting mechanics,
+            <p class="text-gray-300 exp-p">Developed high-load iGaming backend on Laravel, implementing betting mechanics,
                 bonus engines, and game logic, supporting 10,000+ users with ~70–100ms p95 response times,
                 achieved through OPcache tuning, Redis-based caching layers and query optimization.</p>
-            <p class="text-gray-300">Supported and refactored a 15+ year legacy PHP platform, initiating and leading
+            <p class="text-gray-300 exp-p">Supported and refactored a 15+ year legacy PHP platform, initiating and leading
                 migration to the latest Laravel version.</p>
-            <p class="text-gray-300">Designed and maintained end-to-end CI/CD pipelines — integrated automated testing,
+            <p class="text-gray-300 exp-p">Designed and maintained end-to-end CI/CD pipelines — integrated automated testing,
                 static analysis, code style enforcement during merge requests.</p>
             <div class="tech-stack">
                 <span class="tech-badge">Laravel 11/12</span>
@@ -38,11 +38,11 @@
             <p class="text-gray-300 card-position">Product Engineer</p>
             <br />
             <br />
-            <p class="text-gray-300">Architected and built from scratch backend systems for 5+ diverse products
+            <p class="text-gray-300 exp-p">Architected and built from scratch backend systems for 5+ diverse products
                 (smart car app, gaming platform, job search portal, hotel booking system, business SaaS)
                 using Laravel — delivered fully functional platforms end-to-end.</p>
-            <p class="text-gray-300">Built frontend components with Vue/React where needed, supporting full-stack development.</p>
-            <p class="text-gray-300">Mentored 5 junior developers through code reviews, pair programming, and best practices
+            <p class="text-gray-300 exp-p">Built frontend components with Vue/React where needed, supporting full-stack development.</p>
+            <p class="text-gray-300 exp-p">Mentored 5 junior developers through code reviews, pair programming, and best practices
                 enforcement — shortened onboarding time.</p>
             <div class="tech-stack">
                 <span class="tech-badge">Laravel</span>
@@ -61,17 +61,17 @@
             <p class="text-gray-300 card-position">Full Stack Developer</p>
             <br />
             <br />
-            <p class="text-gray-300">
+            <p class="text-gray-300 exp-p">
                 Migration of monolithic secure phones/gadgets platform to microservices architecture —
                 improved system scalability enabled independent service deployments.
             </p>
-            <p class="text-gray-300">
+            <p class="text-gray-300 exp-p">
                 Rewrote legacy Yii2 backend to modern Laravel/Symfony stack — reduced maintenance costs
             </p>
-            <p class="text-gray-300">
+            <p class="text-gray-300 exp-p">
                 Developed frontend components using React, integrated into mobile applications via WebView.
             </p>
-            <p>
+            <p class="text-gray-300 exp-p">
                 Built admin dashboards, payment systems, and credit management modules.
             </p>
             <div class="tech-stack">
@@ -91,15 +91,17 @@
             <p class="text-gray-300 card-position">Full Stack Developer</p>
             <br />
             <br />
-            Collaborated closely with designers and PMs to implement user-centric features.
-            <p class="text-gray-300">
+            <p class="text-gray-300 exp-p">
+                Collaborated closely with designers and PMs to implement user-centric features.
+            </p>
+            <p class="text-gray-300 exp-p">
                 Delivered multiple client projects on Upwork before joining the development of a dating
                 and social media platform.
             </p>
-            <p class="text-gray-300">
+            <p class="text-gray-300 exp-p">
                 Built and maintained backend services with Symfony and frontend components with Angular.
             </p>
-            <p class="text-gray-300">
+            <p class="text-gray-300 exp-p">
                 Collaborated closely with designers and PMs to implement user-centric features.
             </p>
             <div class="tech-stack">

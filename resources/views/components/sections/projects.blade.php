@@ -1,23 +1,13 @@
-<section id="projects" class="projects-section py-20 bg-gray-50">
-    <div class="works-wrapper mt-20 mx-auto px-6 flex flex-col md:flex-row items-start md:items-stretch gap-12">
-
-        <!-- Левая часть: картинка -->
-        <div class="w-full md:w-1/2 relative overflow-hidden rounded-xl bg-black">
-            <!-- Чёрный фон -->
-            <div class="absolute inset-0 bg-black z-10 transition-opacity duration-500" id="blackOverlay"></div>
-
-            <!-- Картинки проектов -->
-            <img src="{{ asset('images/winna.png') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="gambling1">
-            <img src="{{ asset('images/heybets.png') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="gambling2">
-            <img src="{{ asset('images/grabien.png') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="grabien">
-            <img src="{{ asset('images/saas-training-app.webp') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="music">
-            <img src="{{ asset('images/mvp-for-gamers-with-blockchain-1.webp') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="game">
-            <img src="{{ asset('images/car.jpg') }}" class="project-image absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 scale-105" data-project="car">
-        </div>
-
-        <!-- Правая часть: список проектов -->
-        <div class="w-full md:w-1/2 flex flex-col">
-            <h2 class="hr-projects text-4xl font-bold mb-8 latest-works-header text-white tracking-tight" style="text-shadow: 0 2px 8px rgba(0,0,0,0.07);">
+<section class="min-h-screen flex justify-center items-center px-4">
+    <div class="w-full md:w-1/2 flex flex-col">
+        <div class="w-full md:w-1/2 flex flex-col project-block">
+            <h2 class="
+            text-4xl
+            font-bold
+            mb-8
+            latest-works-header
+            text-white tracking-tight"
+                style="text-shadow: 0 2px 8px rgba(0,0,0,0.07);">
                 Latest Works
             </h2>
 
@@ -109,20 +99,28 @@
 
         <!-- Modal -->
         <div id="projectModal" class="fixed inset-0 z-50 hidden bg-gradient-to-r from-purple-800/40 via-indigo-800/40 to-blue-900/40 backdrop-blur-lg flex items-center justify-center p-6">
-            <div class="bg-gray-900/95 text-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative p-10 transform scale-95 opacity-0 transition-all duration-300 shadow-2xl border border-white/10">
-
+            <div class="modal-content-block text-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative p-10 transform scale-95 opacity-0 transition-all duration-300 shadow-2xl border border-white/10">
                 <!-- Close button -->
-                <button id="closeModal" class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-blue-500/80 text-white hover:text-white transition-all duration-300 transform hover:rotate-90 hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <button id="closeModal" class="
+    absolute top-6 right-6 w-14 h-14 flex items-center justify-center
+    rounded-full bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500
+    shadow-xl hover:shadow-2xl
+    text-white hover:text-yellow-100
+    transition-all duration-500
+    transform hover:rotate-180 hover:scale-125
+">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
 
                 <!-- Project content -->
                 <h2 id="modalTitle" class="text-4xl font-bold mb-6"></h2>
+
+                <div id="modalImages" class="relative mt-12 h-72 flex items-center justify-center"></div>
+
                 <p id="modalDescription" class="text-lg leading-relaxed whitespace-pre-line"></p>
             </div>
         </div>
-
     </div>
 </section>

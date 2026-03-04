@@ -15,7 +15,6 @@
     color: black;
 }
 
-/* Основной стиль текста */
 .footer-btn {
     color: white;
     background: linear-gradient(120deg, #334155, #475569, #64748b, #94a3b8);
@@ -28,28 +27,25 @@
     transition: transform 0.3s, filter 0.3s;
 }
 
-/* Анимация движения воды */
 @keyframes waveText {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Hover эффект */
 .footer-btn:hover {
     transform: scale(1.05);
     filter: brightness(1.2);
 }
 
-/* Активная секция */
 .footer-btn.active {
     filter: brightness(1.8) saturate(1.1);
     text-shadow: 0 0 10px rgba(255,255,255,0.6);
 }
 
 #experience {
-    height: 100vh; /* Полная высота экрана */
-    position: relative; /* для absolute Vanta */
+    height: 100vh;
+    position: relative;
     overflow: hidden;
 }
 
@@ -57,7 +53,7 @@
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     width: 100%;
-    height: 100%;  /* Обязательно */
+    height: 100%;
     z-index: 0;
 }
 
@@ -84,26 +80,8 @@
     line-height: 92px;
 }
 
-#hero-title{
-
-}
-
-#hero-subtitle{
-
-}
-
-
-
 #hero-text {
-    /*font-family: "Boldonse", system-ui;*/
-    /*font-weight: 200;*/
-    /*font-style: normal;*/
     font-size: 1.2em;
-}
-
-
-#hero-subtitle{
-    /*border: 1px solid red;*/
 }
 
 @keyframes revealUp {
@@ -130,7 +108,6 @@ a:hover ~ #cursor {
     background-color: rgba(255,255,255,0.2);
 }
 
-/* Размытие-шлейф через ::after */
 #cursor::after {
     content: "";
     position: absolute;
@@ -191,9 +168,7 @@ a:hover ~ #cursor {
     font-weight: 400;
     letter-spacing: 1px;
     text-transform: uppercase;
-
     color: rgba(255, 255, 255, 0.6);
-
     margin-bottom: 8px;
 }
 
@@ -201,28 +176,21 @@ a:hover ~ #cursor {
 .card-position {
     position: relative;
     display: inline-block;
-
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
     font-weight: 600;
-
     color: #ffffff;
-
     transition: color 0.3s ease;
 }
-
 
 .card-position::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: -4px;
-
     width: 0;
     height: 2px;
-
     background: linear-gradient(90deg, #7fd8ff, #ffffff);
-
     transition: width 0.4s ease;
 }
 
@@ -275,10 +243,6 @@ a:hover ~ #cursor {
         0 0 10px rgba(127, 216, 255, 0.3);
 }
 
-.exp-card p{
-    /*font-family: "Boldonse", system-ui;*/
-}
-
 .exp-card {
     opacity: 0;
     transform: translateY(50px);
@@ -301,7 +265,6 @@ a:hover ~ #cursor {
     transform: translateY(0);
 }
 
-
 .projects-scroll {
     max-height: 400px;        /* фиксированная высина */
     overflow-y: auto;         /* можно скроллить */
@@ -309,7 +272,7 @@ a:hover ~ #cursor {
 }
 
 .projects-scroll::-webkit-scrollbar {
-    display: none;            /* Chrome / Safari */
+    display: none;
 }
 
 .latest-works-header {
@@ -319,11 +282,7 @@ a:hover ~ #cursor {
     position: relative;
     display: inline-block;
     margin-bottom: 40px;
-    /*color: rgba(255, 255, 255, 0.73);*/
-    /* Градиентный текст */
-    /*background: linear-gradient(90deg, #111827, #2563eb);*/
     -webkit-background-clip: text;
-    /*-webkit-text-fill-color: transparent;*/
 }
 
 .latest-works-header::after {
@@ -331,7 +290,7 @@ a:hover ~ #cursor {
     position: absolute;
     left: 0;
     bottom: -12px;
-    width: 60%;
+    width: 100%;
     height: 4px;
     border-radius: 4px;
     background: linear-gradient(90deg, #abb1c1, transparent);
@@ -340,11 +299,10 @@ a:hover ~ #cursor {
 .project-title {
     position: relative;
     display: inline-block;
-    color: #fff; /* обычный цвет текста */
+    color: #fff;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Линия */
 .project-title::after {
     content: "";
     position: absolute;
@@ -357,15 +315,93 @@ a:hover ~ #cursor {
     transition: width 0.4s ease;
 }
 
-/* Анимация при hover */
 .group:hover .project-title::after {
     width: 100%;
 }
 
-/* Эффект свечения текста при hover */
 .group:hover .project-title {
     color: #fff;
     text-shadow: 0 0 8px #2563eb, 0 0 12px #abb1c1;
+}
+
+.project-block{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#home h1 {
+    font-size: 3rem;
+}
+
+@media (min-width: 768px) {
+    #home h1 {
+        font-size: 6rem;
+    }
+}
+
+#home h2 {
+    font-size: 20px;
+}
+
+
+@media (max-width: 400px) {
+    #home h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .footer-btn {
+        font-size: 1.5rem;
+    }
+
+    .social-links-wrapper {
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .footer-btn {
+        font-size: 1.3rem;
+    }
+}
+
+
+.vanta-canvas {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    z-index: 0;
+}
+
+.project-item {
+    font-family: "Fredericka the Great", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.project-item {
+    font-family: "Scope One", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#projectModal p, #home p, .exp-p{
+    font-family: "Scope One", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.passion-one-black {
+    font-family: "Passion One", sans-serif;
+    font-weight: 900;
+    font-style: normal;
 }
 
 

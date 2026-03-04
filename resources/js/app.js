@@ -1,5 +1,4 @@
 import './bootstrap';
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.134/build/three.module.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     VANTA.WAVES({
@@ -34,7 +33,6 @@ function initVanta(options) {
     });
 }
 
-// Функция плавного перехода параметров
 function morphVanta(targetOptions, duration = 1500) {
     if (!vantaEffect) return;
 
@@ -92,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Авто-подсветка текущей секции при скролле
     const sections = ["#about", "#experience", "#projects"].map(id => document.querySelector(id));
     window.addEventListener("scroll", () => {
         let scrollPos = window.scrollY + window.innerHeight / 2;
@@ -148,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
         waveIntensity: 0.4,
         color: 0x0a0a0a
     });
-    // Инициализация: показываем только первую секцию (Home)
     sections.forEach((sec, i) => sec.style.display = i === 0 ? "block" : "none");
     buttons[0].classList.add("active");
 
@@ -180,12 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     waveHeight: 120,
                     waveSpeed: 3.5,
                     waveIntensity: 2.0,
-                    // color: 0xff0033
-                    // color: 880022
-                    // color: 0x888888
-                    // color: "0x303033"
-                    // color: "0xf5f5f7"
-                    // color: "0xe6e6e6"
                     color: "0x1f1f1f"
                 }, 2000);
 
@@ -197,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 sec.style.display = sec.id === targetId ? "block" : "none";
             });
 
-            // Обновляем активную кнопку
             buttons.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
         });
@@ -221,17 +210,15 @@ document.addEventListener("DOMContentLoaded", () => {
             i++;
             setTimeout(typeWriter, 40);
         } else {
-            // hero-subtitle и hero-text показываем первый раз
             subtitle.style.opacity = "1";
             subtitle.style.animation = "glitch 0.6s ease";
             text.style.opacity = "1";
             text.style.animation = "revealUp 1s ease forwards";
 
-            // Повторяем анимацию только для hero-subtitle каждые 2 секунды
             setInterval(() => {
-                subtitle.style.animation = "none"; // сброс текущей анимации
-                subtitle.offsetHeight; // триггер перерендера
-                subtitle.style.animation = "glitch 0.6s ease"; // снова анимация
+                subtitle.style.animation = "none";
+                subtitle.offsetHeight;
+                subtitle.style.animation = "glitch 0.6s ease";
             }, 3000);
         }
     }
@@ -249,7 +236,6 @@ document.addEventListener("mousemove", e => {
     mouseY = e.clientY;
 });
 
-// Плавное движение курсора с небольшим лагом
 function animateCursor() {
     posX += (mouseX - posX) * 0.15;
     posY += (mouseY - posY) * 0.15;
@@ -278,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => badge.classList.add("show"), index * 100);
                 });
 
-                observer.unobserve(card); // больше не нужно следить
+                observer.unobserve(card);
             }
         });
     }, {threshold: 0.2});
@@ -290,12 +276,10 @@ function animateExperienceCards() {
     const cards = document.querySelectorAll(".exp-card");
 
     cards.forEach(card => {
-        // Сбрасываем классы, чтобы анимация могла повториться
         card.classList.remove("show");
         const badges = card.querySelectorAll(".tech-badge");
         badges.forEach(badge => badge.classList.remove("show"));
 
-        // Слегка задерживаем, чтобы CSS transition сработал
         setTimeout(() => {
             card.classList.add("show");
             badges.forEach((badge, index) => {
@@ -311,15 +295,12 @@ const blackOverlay = document.getElementById('blackOverlay');
 
 function showProject(project) {
 
-    // Убираем все картинки
     images.forEach(img => {
         img.classList.remove('opacity-100', 'scale-100');
         img.classList.add('opacity-0', 'scale-105');
     });
 
-    // Находим нужную
     const active = document.querySelector(`[data-project="${project}"].project-image`);
-
     if (active) {
         blackOverlay.style.opacity = "0";
         active.classList.remove('opacity-0', 'scale-105');
@@ -383,29 +364,49 @@ document.querySelectorAll('.footer-btn').forEach(btn => {
 const projects = {
     gambling1: {
         title: "Backend Developer / iGaming Platform",
-        description: "Backend Developer / iGaming Engineer\n" +
+        description: 
             "Developed and maintained high-load online gambling platform systems.\n" +
             "Designed complex business logic for bonus systems (welcome bonuses, free spins, cashback, VIP programs), ensuring accurate calculations, instant crediting, and protection against abuse.\n" +
-            "Optimized microservice performance, implemented monitoring and alerting, reduced latency, and increased reliability of distributed systems under peak loads with thousands of concurrent players.\n"
+            "Optimized microservice performance, implemented monitoring and alerting, reduced latency, and increased reliability of distributed systems under peak loads with thousands of concurrent players.\n",
+        images: [
+            "images/winna.png",
+            "images/winna.png",
+            "images/winna.png"
+        ]
     },
     gambling2: {
         title: "Backend Developer / iGaming Platform",
         description: "Responsible for backend development and maintenance of in-house games on a large gambling platform: original slots, crash, dice, plinko, table games, and other in-house titles.\n" +
             "Implemented game logic, RTP configurations, volatility tuning, and bonus mechanics with a focus on fairness, compliance, and GGR maximization.\n" +
-            "Optimized performance for millions of spins per day, implemented real-time monitoring of actual RTP and anomalies, and scaled microservices for seamless gameplay with zero downtime.\n"
+            "Optimized performance for millions of spins per day, implemented real-time monitoring of actual RTP and anomalies, and scaled microservices for seamless gameplay with zero downtime.\n",
+        images: [
+            "images/heybets.png",
+            "images/heybets.png",
+            "images/heybets.png",
+        ]
     },
     grabien: {
         title: "Full Stack Developer / Grabien",
         description: "Rewrote the legacy system of a leading media marketplace for news clips (Grabien — an online platform for journalists, producers, and media with video/audio archives, clipping tools, WebClipper, NewsBase, etc.).\n" +
             "Integrated PDF parsing and Manticore Search for powerful full-text search across transcripts, documents, and metadata — significantly improving search speed, accuracy, and relevance.\n" +
-            "Added new features: UI/UX enhancements, batch processing, integrations with external services, and performance monitoring — all without downtime, focusing on stability and scalability for thousands of users.\n"
+            "Added new features: UI/UX enhancements, batch processing, integrations with external services, and performance monitoring — all without downtime, focusing on stability and scalability for thousands of users.\n",
+        images: [
+            "images/grabien.png",
+            "images/grabien.png",
+            "images/grabien.png",
+        ]
     },
     music: {
         title: "Backend Developer / SaaS Training App",
         description: "Designed a scalable and secure backend architecture.\n" +
             "Implemented APIs for frontend and mobile clients.\n" +
             "Integrated third-party services for video lessons and analytics.\n" +
-            "Managed user accounts, progress tracking, and notifications."
+            "Managed user accounts, progress tracking, and notifications.",
+        images: [
+            "images/saas-training-app.webp",
+            "images/saas-training-app.webp",
+            "images/saas-training-app.webp",
+        ]
     },
     game: {
         title: "Full Stack Developer / MVP for Gamers",
@@ -415,20 +416,30 @@ const projects = {
             "- Gamified quests and tournaments\n" +
             "- User profiles with digital trophy rooms and NFTs\n" +
             "- Social feed for content and achievements\n" +
-            "- Admin panel for managing users and content"
+            "- Admin panel for managing users and content",
+        images: [
+            "images/mvp-for-gamers-with-blockchain-1.webp",
+            "images/mvp-for-gamers-with-blockchain-1.webp",
+            "images/mvp-for-gamers-with-blockchain-1.webp",
+        ]
     },
     car: {
         title: "Backend Developer / Smart Auto Service",
-        description: "Fully developed the backend for a mobile iOS application, including integration with external services (maps, AI) and designing architecture for scalability and reliability."
+        description: "Fully developed the backend for a mobile iOS application, including integration with external services (maps, AI) and designing architecture for scalability and reliability.",
+        images: [
+            "images/car.jpg",
+            "images/car.jpg",
+            "images/car.jpg",
+        ]
     }
 };
 
-const modal = document.getElementById('projectModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalDescription = document.getElementById('modalDescription');
-const closeModalBtn = document.getElementById('closeModal');
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const closeModalBtn = document.getElementById('closeModal');
 
-document.querySelectorAll('.project-item').forEach(item => {
+    document.querySelectorAll('.project-item').forEach(item => {
     item.addEventListener('click', () => {
         const projectKey = item.dataset.project;
         const project = projects[projectKey];
@@ -436,7 +447,6 @@ document.querySelectorAll('.project-item').forEach(item => {
         modalTitle.textContent = project.title;
         modalDescription.textContent = project.description;
 
-        // Показать модалку с анимацией
         modal.classList.remove('hidden');
         setTimeout(() => {
             modal.children[0].classList.remove('opacity-0', 'scale-95');
@@ -444,16 +454,66 @@ document.querySelectorAll('.project-item').forEach(item => {
     });
 });
 
-closeModalBtn.addEventListener('click', () => {
+    closeModalBtn.addEventListener('click', () => {
     modal.children[0].classList.add('opacity-0', 'scale-95');
     setTimeout(() => modal.classList.add('hidden'), 300);
 });
 
-modal.addEventListener('click', e => {
+    modal.addEventListener('click', e => {
     if (e.target === modal) {
-        modal.children[0].classList.add('opacity-0', 'scale-95');
-        setTimeout(() => modal.classList.add('hidden'), 300);
-    }
+    modal.children[0].classList.add('opacity-0', 'scale-95');
+    setTimeout(() => modal.classList.add('hidden'), 300);
+}
 });
 
+
+const modalImages = document.getElementById('modalImages');
+
+document.querySelectorAll('.project-item').forEach(item => {
+    item.addEventListener('click', () => {
+
+        const projectKey = item.dataset.project;
+        const project = projects[projectKey];
+
+        modalTitle.textContent = project.title;
+        modalDescription.textContent = project.description;
+
+        modalImages.innerHTML = '';
+
+        if (project.images) {
+
+            project.images.forEach((src, index) => {
+
+                const img = document.createElement('img');
+                img.src = src;
+
+                img.className = `
+            absolute w-64 h-40 object-cover rounded-2xl shadow-2xl
+            transition-all duration-700 ease-out
+        `;
+
+                img.style.transform = `rotate(0deg) translateX(0px) scale(0.95)`;
+
+                modalImages.appendChild(img);
+
+                const rotations = [-14, 0, 14];
+                const offsets = [-90, 0, 90];
+
+                setTimeout(() => {
+                    img.style.transform = `
+                rotate(${rotations[index] || 0}deg)
+                translateX(${offsets[index] || 0}px)
+                scale(1)
+            `;
+                }, 50 + index * 120);
+            });
+        }
+
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.children[0].classList.remove('opacity-0', 'scale-95');
+        }, 10);
+
+    });
+});
 
