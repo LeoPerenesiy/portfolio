@@ -364,13 +364,13 @@ document.querySelectorAll('.footer-btn').forEach(btn => {
 const projects = {
     gambling1: {
         title: "Backend Developer / iGaming Platform",
-        description: 
+        description:
             "Developed and maintained high-load online gambling platform systems.\n" +
             "Designed complex business logic for bonus systems (welcome bonuses, free spins, cashback, VIP programs), ensuring accurate calculations, instant crediting, and protection against abuse.\n" +
             "Optimized microservice performance, implemented monitoring and alerting, reduced latency, and increased reliability of distributed systems under peak loads with thousands of concurrent players.\n",
         images: [
-            "images/winna.png",
-            "images/winna.png",
+            "images/winna2.png",
+            "images/winna3.png",
             "images/winna.png"
         ]
     },
@@ -380,8 +380,8 @@ const projects = {
             "Implemented game logic, RTP configurations, volatility tuning, and bonus mechanics with a focus on fairness, compliance, and GGR maximization.\n" +
             "Optimized performance for millions of spins per day, implemented real-time monitoring of actual RTP and anomalies, and scaled microservices for seamless gameplay with zero downtime.\n",
         images: [
-            "images/heybets.png",
-            "images/heybets.png",
+            "images/h2.png",
+            "images/h3.png",
             "images/heybets.png",
         ]
     },
@@ -391,8 +391,8 @@ const projects = {
             "Integrated PDF parsing and Manticore Search for powerful full-text search across transcripts, documents, and metadata — significantly improving search speed, accuracy, and relevance.\n" +
             "Added new features: UI/UX enhancements, batch processing, integrations with external services, and performance monitoring — all without downtime, focusing on stability and scalability for thousands of users.\n",
         images: [
-            "images/grabien.png",
-            "images/grabien.png",
+            "images/grabien2.png",
+            "images/grabien3.png",
             "images/grabien.png",
         ]
     },
@@ -404,8 +404,8 @@ const projects = {
             "Managed user accounts, progress tracking, and notifications.",
         images: [
             "images/saas-training-app.webp",
-            "images/saas-training-app.webp",
-            "images/saas-training-app.webp",
+            "images/saas2.webp",
+            "images/saas3.webp",
         ]
     },
     game: {
@@ -419,17 +419,17 @@ const projects = {
             "- Admin panel for managing users and content",
         images: [
             "images/mvp-for-gamers-with-blockchain-1.webp",
-            "images/mvp-for-gamers-with-blockchain-1.webp",
-            "images/mvp-for-gamers-with-blockchain-1.webp",
+            "images/Games3.webp",
+            "images/games2.webp",
         ]
     },
     car: {
         title: "Backend Developer / Smart Auto Service",
         description: "Fully developed the backend for a mobile iOS application, including integration with external services (maps, AI) and designing architecture for scalability and reliability.",
         images: [
+            "images/cars3.jpg",
             "images/car.jpg",
-            "images/car.jpg",
-            "images/car.jpg",
+            "images/cars2.jpg",
         ]
     }
 };
