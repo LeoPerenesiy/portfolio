@@ -1,133 +1,87 @@
 import './bootstrap';
 
-document.addEventListener("DOMContentLoaded", () => {
-    VANTA.WAVES({
-        el: "#vanta-bg",
-        mouseControls: true,
-        touchControls: true,
-        minHeight: 600.00,
-        minWidth: 300.00,
-        scale: 1.0,
-        scaleMobile: 1.0,
-        waveHeight: 20.0,
-        waveSpeed: 1.0,
-        color: 0x0a0a0a,     // почти чёрный
-        shininess: 30.0,
-        waveIntensity: 0.5,
-    });
-});
-
+// --- VANTA WAVES ---
 let vantaEffect = null;
 
-function initVanta(options) {
+function initVanta(options = {}) {
     if (vantaEffect) vantaEffect.destroy();
+
     vantaEffect = VANTA.WAVES({
         el: "#vanta-bg",
         mouseControls: true,
         touchControls: true,
-        scale: 1.0,
-        scaleMobile: 1.0,
         minHeight: window.innerHeight,
         minWidth: window.innerWidth,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        waveHeight: 20,
+        waveSpeed: 0.8,
+        waveIntensity: 0.5,
+        color: 0x0a0a0a,
+        shininess: 30,
         ...options
     });
 }
 
-function morphVanta(targetOptions, duration = 1500) {
+function morphVanta(targetOptions, duration = 1800) {
     if (!vantaEffect) return;
 
     const start = {
         waveHeight: vantaEffect.options.waveHeight,
         waveSpeed: vantaEffect.options.waveSpeed,
         waveIntensity: vantaEffect.options.waveIntensity,
-        color: vantaEffect.options.color
+        color: vantaEffect.options.color || 0x0a0a0a
     };
 
     const startTime = performance.now();
 
-    function animate() {
-        const now = performance.now();
-        let t = (now - startTime) / duration;
+    function animate(time) {
+        const elapsed = time - startTime;
+        let t = elapsed / duration;
         if (t > 1) t = 1;
 
-        // Линейная интерполяция числовых параметров
+        // Плавная интерполяция
         vantaEffect.options.waveHeight = start.waveHeight + (targetOptions.waveHeight - start.waveHeight) * t;
         vantaEffect.options.waveSpeed = start.waveSpeed + (targetOptions.waveSpeed - start.waveSpeed) * t;
         vantaEffect.options.waveIntensity = start.waveIntensity + (targetOptions.waveIntensity - start.waveIntensity) * t;
 
-        // Для цвета: простая интерполяция RGB
-        function lerpColor(a, b, t) {
-            const r = ((a >> 16) & 0xff) + (((b >> 16) & 0xff) - ((a >> 16) & 0xff)) * t;
-            const g = ((a >> 8) & 0xff) + (((b >> 8) & 0xff) - ((a >> 8) & 0xff)) * t;
-            const bl = (a & 0xff) + ((b & 0xff) - (a & 0xff)) * t;
-            return (Math.round(r) << 16) | (Math.round(g) << 8) | Math.round(bl);
-        }
+        // Цвет — RGB интерполяция
         if (targetOptions.color !== undefined) {
-            vantaEffect.options.color = lerpColor(start.color, targetOptions.color, t);
+            const r1 = (start.color >> 16) & 0xff;
+            const g1 = (start.color >> 8) & 0xff;
+            const b1 = start.color & 0xff;
+            const r2 = (targetOptions.color >> 16) & 0xff;
+            const g2 = (targetOptions.color >> 8) & 0xff;
+            const b2 = targetOptions.color & 0xff;
+
+            const r = Math.round(r1 + (r2 - r1) * t);
+            const g = Math.round(g1 + (g2 - g1) * t);
+            const b = Math.round(b1 + (b2 - b1) * t);
+
+            vantaEffect.options.color = (r << 16) | (g << 8) | b;
         }
 
-        if (t < 1) {
-            requestAnimationFrame(animate);
-        }
+        if (t < 1) requestAnimationFrame(animate);
     }
 
-    animate();
+    requestAnimationFrame(animate);
 }
 
-// FOOTER
-document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".footer-btn");
-
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            buttons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-
-            const target = document.querySelector(btn.dataset.target);
-            if(target){
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-        });
-    });
-
-    const sections = ["#about", "#experience", "#projects"].map(id => document.querySelector(id));
-    window.addEventListener("scroll", () => {
-        let scrollPos = window.scrollY + window.innerHeight / 2;
-        sections.forEach((sec, i) => {
-            const btn = buttons[i];
-            const offsetTop = sec.offsetTop;
-            const offsetBottom = offsetTop + sec.offsetHeight;
-
-            if(scrollPos >= offsetTop && scrollPos < offsetBottom){
-                buttons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-            }
-        });
-    });
-});
-
+// --- Пульсация волн (только для projects) ---
 let pulseInterval = null;
 
 function startWavePulse() {
-    if (!vantaEffect) return;
-
     if (pulseInterval) clearInterval(pulseInterval);
 
     const baseHeight = 100;
     const baseIntensity = 1.6;
 
     pulseInterval = setInterval(() => {
-        const time = Date.now() * 0.003;
-
-        vantaEffect.options.waveHeight =
-            baseHeight + Math.sin(time) * 15;
-
-        vantaEffect.options.waveIntensity =
-            baseIntensity + Math.sin(time) * 0.2;
-
+        const time = Date.now() * 0.0015;
+        vantaEffect.options.waveHeight = baseHeight + Math.sin(time * 2) * 25;
+        vantaEffect.options.waveIntensity = baseIntensity + Math.sin(time * 3) * 0.4;
     }, 16);
 }
-
 
 function stopWavePulse() {
     if (pulseInterval) {
@@ -136,31 +90,35 @@ function stopWavePulse() {
     }
 }
 
+// --- Переключение секций ---
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".footer-btn");
     const sections = document.querySelectorAll(".section");
+
+    // Инициализация Vanta с дефолтными параметрами (home)
     initVanta({
         waveHeight: 18,
         waveSpeed: 0.8,
         waveIntensity: 0.4,
         color: 0x0a0a0a
     });
+
+    // Показываем первую секцию
     sections.forEach((sec, i) => sec.style.display = i === 0 ? "block" : "none");
     buttons[0].classList.add("active");
-
 
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
             const targetId = btn.dataset.target;
 
+            // Плавный morph Vanta для каждой секции (одинаково мягко везде)
             if (targetId === "experience") {
-                // WOW эффект с плавным morph
                 morphVanta({
-                    waveHeight: 60,
-                    waveSpeed: 2.0,
-                    waveIntensity: 1.2,
+                    waveHeight: 40,
+                    waveSpeed: 1.2,
+                    waveIntensity: 0.8,
                     color: 0x0011ff
-                });
+                }, 1800);
                 stopWavePulse();
                 animateExperienceCards();
             } else if (targetId === "home") {
@@ -169,17 +127,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     waveSpeed: 0.8,
                     waveIntensity: 0.4,
                     color: 0x0a0a0a
-                });
+                }, 1800);
                 stopWavePulse();
-            } else {
+            } else if (targetId === "projects") {
                 morphVanta({
-                    waveHeight: 120,
-                    waveSpeed: 2.8,
-                    waveIntensity: 1.8,
+                    waveHeight: 110,
+                    waveSpeed: 2.5,
+                    waveIntensity: 1.6,
                     color: 0x1a0033
-                }, 2000);
-
+                }, 2200);
                 startWavePulse();
+                animateProjectsSection();
             }
 
             // Показываем только выбранную секцию
@@ -187,13 +145,74 @@ document.addEventListener("DOMContentLoaded", () => {
                 sec.style.display = sec.id === targetId ? "block" : "none";
             });
 
+            // Активная кнопка
             buttons.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
         });
     });
+
+    // Прокрутка для активации кнопок
+    window.addEventListener("scroll", () => {
+        let scrollPos = window.scrollY + window.innerHeight / 2;
+        sections.forEach((sec, i) => {
+            const offsetTop = sec.offsetTop;
+            const offsetBottom = offsetTop + sec.offsetHeight;
+
+            if (scrollPos >= offsetTop && scrollPos < offsetBottom) {
+                buttons.forEach(b => b.classList.remove("active"));
+                buttons[i].classList.add("active");
+            }
+        });
+    });
 });
 
-// HOME ANIMATION
+// --- Анимация карточек опыта ---
+function animateExperienceCards() {
+    const cards = document.querySelectorAll(".exp-card");
+
+    cards.forEach((card, index) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(40px)";
+
+        setTimeout(() => {
+            card.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        }, index * 120);
+    });
+}
+
+// --- Анимация секции Projects (вау-эффект без белых вспышек) ---
+function animateProjectsSection() {
+    const projectsSection = document.getElementById("projects");
+    const header = projectsSection.querySelector(".latest-works-header");
+    const projectItems = projectsSection.querySelectorAll(".project-item");
+
+    // Сбрасываем
+    header.style.opacity = "0";
+    header.style.transform = "translateY(40px)";
+    projectItems.forEach(item => {
+        item.style.opacity = "0";
+        item.style.transform = "translateX(60px)";
+    });
+
+    // Запускаем анимацию
+    setTimeout(() => {
+        header.style.transition = "opacity 0.9s ease, transform 0.9s ease";
+        header.style.opacity = "1";
+        header.style.transform = "translateY(0)";
+
+        projectItems.forEach((item, i) => {
+            setTimeout(() => {
+                item.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+                item.style.opacity = "1";
+                item.style.transform = "translateX(0)";
+            }, 150 + i * 120);
+        });
+    }, 100);
+}
+
+// --- HOME ANIMATION (твой код без изменений) ---
 document.addEventListener("DOMContentLoaded", () => {
     const title = document.getElementById("hero-title");
     const subtitle = document.getElementById("hero-subtitle");
@@ -226,6 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     typeWriter();
 });
 
+// --- Курсор (твой код без изменений) ---
 const cursor = document.getElementById("cursor");
 
 let mouseX = 0, mouseY = 0;
@@ -248,7 +268,7 @@ function animateCursor() {
 
 animateCursor();
 
-
+// --- IntersectionObserver для карточек опыта (твой код без изменений) ---
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".exp-card");
 
@@ -258,7 +278,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const card = entry.target;
                 card.classList.add("show");
 
-                // Показываем бейджи с небольшим stagger
                 const badges = card.querySelectorAll(".tech-badge");
                 badges.forEach((badge, index) => {
                     setTimeout(() => badge.classList.add("show"), index * 100);
@@ -272,95 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cards.forEach(card => observer.observe(card));
 });
 
-function animateExperienceCards() {
-    const cards = document.querySelectorAll(".exp-card");
-
-    cards.forEach(card => {
-        card.classList.remove("show");
-        const badges = card.querySelectorAll(".tech-badge");
-        badges.forEach(badge => badge.classList.remove("show"));
-
-        setTimeout(() => {
-            card.classList.add("show");
-            badges.forEach((badge, index) => {
-                setTimeout(() => badge.classList.add("show"), index * 100);
-            });
-        }, 50);
-    });
-}
-
-const items = document.querySelectorAll('.project-item');
-const images = document.querySelectorAll('.project-image');
-const blackOverlay = document.getElementById('blackOverlay');
-
-function showProject(project) {
-
-    images.forEach(img => {
-        img.classList.remove('opacity-100', 'scale-100');
-        img.classList.add('opacity-0', 'scale-105');
-    });
-
-    const active = document.querySelector(`[data-project="${project}"].project-image`);
-    if (active) {
-        blackOverlay.style.opacity = "0";
-        active.classList.remove('opacity-0', 'scale-105');
-        active.classList.add('opacity-100', 'scale-100');
-    }
-}
-
-items.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        showProject(item.dataset.project);
-    });
-
-    item.addEventListener('click', () => {
-        showProject(item.dataset.project);
-    });
-});
-
-// ANIMATION FOR PROJECTS SECTION ON SHOW (NO WHITE FLASH, IMAGES STAY CLICKABLE)
-function animateProjectsSection() {
-    const projectsSection = document.getElementById('projects');
-    const header = projectsSection.querySelector('.latest-works-header');
-    const projectItems = projectsSection.querySelectorAll('.project-item');
-
-    // Заголовок
-    header.style.opacity = '0';
-    header.style.transform = 'translateY(20px)';
-
-    // Список проектов справа
-    projectItems.forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(20px)';
-    });
-
-    setTimeout(() => {
-        // Заголовок
-        header.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        header.style.opacity = '1';
-        header.style.transform = 'translateY(0)';
-
-        // Список проектов справа
-        projectItems.forEach((item, i) => {
-            setTimeout(() => {
-                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                item.style.opacity = '1';
-                item.style.transform = 'translateX(0)';
-            }, i * 100);
-        });
-    }, 50);
-}
-
-// Событие переключения футера
-document.querySelectorAll('.footer-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (btn.dataset.target === 'projects') {
-            animateProjectsSection();
-        }
-    });
-});
-
-
+// --- Твой модальный проект (без изменений) ---
 const projects = {
     gambling1: {
         title: "Backend Developer / iGaming Platform",
@@ -434,44 +365,15 @@ const projects = {
     }
 };
 
-    const modal = document.getElementById('projectModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDescription = document.getElementById('modalDescription');
-    const closeModalBtn = document.getElementById('closeModal');
 
-    document.querySelectorAll('.project-item').forEach(item => {
-    item.addEventListener('click', () => {
-        const projectKey = item.dataset.project;
-        const project = projects[projectKey];
-
-        modalTitle.textContent = project.title;
-        modalDescription.textContent = project.description;
-
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.children[0].classList.remove('opacity-0', 'scale-95');
-        }, 10);
-    });
-});
-
-    closeModalBtn.addEventListener('click', () => {
-    modal.children[0].classList.add('opacity-0', 'scale-95');
-    setTimeout(() => modal.classList.add('hidden'), 300);
-});
-
-    modal.addEventListener('click', e => {
-    if (e.target === modal) {
-    modal.children[0].classList.add('opacity-0', 'scale-95');
-    setTimeout(() => modal.classList.add('hidden'), 300);
-}
-});
-
-
+const modal = document.getElementById('projectModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const closeModalBtn = document.getElementById('closeModal');
 const modalImages = document.getElementById('modalImages');
 
 document.querySelectorAll('.project-item').forEach(item => {
     item.addEventListener('click', () => {
-
         const projectKey = item.dataset.project;
         const project = projects[projectKey];
 
@@ -481,19 +383,14 @@ document.querySelectorAll('.project-item').forEach(item => {
         modalImages.innerHTML = '';
 
         if (project.images) {
-
             project.images.forEach((src, index) => {
-
                 const img = document.createElement('img');
                 img.src = src;
-
                 img.className = `
-            absolute w-64 h-40 object-cover rounded-2xl shadow-2xl
-            transition-all duration-700 ease-out
-        `;
-
+                    absolute w-64 h-40 object-cover rounded-2xl shadow-2xl
+                    transition-all duration-700 ease-out
+                `;
                 img.style.transform = `rotate(0deg) translateX(0px) scale(0.95)`;
-
                 modalImages.appendChild(img);
 
                 const rotations = [-14, 0, 14];
@@ -501,10 +398,10 @@ document.querySelectorAll('.project-item').forEach(item => {
 
                 setTimeout(() => {
                     img.style.transform = `
-                rotate(${rotations[index] || 0}deg)
-                translateX(${offsets[index] || 0}px)
-                scale(1)
-            `;
+                        rotate(${rotations[index] || 0}deg)
+                        translateX(${offsets[index] || 0}px)
+                        scale(1)
+                    `;
                 }, 50 + index * 120);
             });
         }
@@ -513,7 +410,17 @@ document.querySelectorAll('.project-item').forEach(item => {
         setTimeout(() => {
             modal.children[0].classList.remove('opacity-0', 'scale-95');
         }, 10);
-
     });
 });
 
+closeModalBtn.addEventListener('click', () => {
+    modal.children[0].classList.add('opacity-0', 'scale-95');
+    setTimeout(() => modal.classList.add('hidden'), 300);
+});
+
+modal.addEventListener('click', e => {
+    if (e.target === modal) {
+        modal.children[0].classList.add('opacity-0', 'scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+});
